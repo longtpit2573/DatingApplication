@@ -44,6 +44,10 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
                     x.NormalizedUserName == loginDto.Username.ToUpper());
 
         if (user == null || user.UserName == null) return Unauthorized("Invalid username");
+         
+            var passwordValid = await userManager.CheckPasswordAsync(user, loginDto.Password);
+        if (!passwordValid) return Unauthorized("Invalid password");
+
 
         return new UserDto
         {
