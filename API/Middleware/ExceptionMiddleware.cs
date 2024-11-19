@@ -15,7 +15,7 @@ public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddlewa
         catch (Exception ex)
         {
             logger.LogError(ex, ex.Message);
-            context.Response.ContentType = "applic  ation/json";
+            context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             var response = env.IsDevelopment()
